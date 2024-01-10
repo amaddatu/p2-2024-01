@@ -44,5 +44,5 @@ app.use(routes);
 
 
 sequelize.sync({ force: SQL_FORCE }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log('Now listening http://localhost:' + PORT));
 });

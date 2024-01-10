@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
+// i want to make sure that i can see my env vars
+require('dotenv').config();
 
 router.get('/', async (req, res) => {
   try {
@@ -77,6 +79,24 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+// withAuth will ensure that the user is logged in before access
+router.get('/watch', withAuth, (req, res) => {
+  res.render('pocketwatch', {
+    // fill in later???
+    // layout: 'other_main' // layouts/other_main.handlebars
+  });
+});
+
+
+router.get('/turtle/:term', (req, res) => {
+  res.render('turtle', {
+    term: req.params.term,
+    apikey: process.env.GIPHY_APIKEY
+    // fill in later???
+    // layout: 'other_main' // layouts/other_main.handlebars
+  });
 });
 
 module.exports = router;

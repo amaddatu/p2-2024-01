@@ -5,6 +5,6 @@ const pocketwatchRoutes = require('./pocketWatchRoutes');
 
 router.use('/users', userRoutes);
 router.use('/projects', projectRoutes);
-router.use('/pocketwatchRoutes', pocketwatchRoutes);
+router.use('/pocketwatch', pocketwatchRoutes);
 
 module.exports = router;
