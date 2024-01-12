@@ -90,12 +90,20 @@ router.get('/watch', withAuth, (req, res) => {
 });
 
 
+// removing withAuth means that this page will not require login
+router.get('/turtle-search', (req, res) => {
+  res.render('turtle-search', {
+    // fill in later???
+    layout: 'other_main' // layouts/other_main.handlebars
+  });
+});
+
 router.get('/turtle/:term', (req, res) => {
   res.render('turtle', {
     term: req.params.term,
-    apikey: process.env.GIPHY_APIKEY
+    apikey: process.env.GIPHY_APIKEY,
     // fill in later???
-    // layout: 'other_main' // layouts/other_main.handlebars
+    layout: 'other_main' // layouts/other_main.handlebars
   });
 });
 
