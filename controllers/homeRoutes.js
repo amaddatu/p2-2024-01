@@ -99,9 +99,16 @@ router.get('/turtle-search', (req, res) => {
 });
 
 router.get('/turtle/:term', (req, res) => {
+  // ANY axios call
+  // console.log(axiosDataHere);
+  // // simple serialize
+  // simplifiedData = JSON.parse(JSON.stringify(complicatedData));
+  // console.log(simplifiedData);
   res.render('turtle', {
     term: req.params.term,
     apikey: process.env.GIPHY_APIKEY,
+
+    // data: simplifiedData,
     // fill in later???
     layout: 'other_main' // layouts/other_main.handlebars
   });
