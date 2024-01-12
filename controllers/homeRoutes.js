@@ -133,7 +133,7 @@ router.get('/axios-turtle/:term', async (req, res) => {
   // // simple serialize
   simplifiedData = JSON.parse(JSON.stringify(data.data));
 
-  // found an extra data key for only giphy
+  // found an extra data key for only giphy, i generally like to target arrays in my data for use in handlebars
   simplifiedData = simplifiedData.data;
 
   console.log(simplifiedData);
