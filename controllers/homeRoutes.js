@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
+const axios = require('axios');
 // i want to make sure that i can see my env vars
 require('dotenv').config();
 
@@ -109,6 +110,38 @@ router.get('/turtle/:term', (req, res) => {
     apikey: process.env.GIPHY_APIKEY,
 
     // data: simplifiedData,
+    // fill in later???
+    layout: 'other_main' // layouts/other_main.handlebars
+  });
+});
+
+// removing withAuth means that this page will not require login
+router.get('/axios-turtle-search', (req, res) => {
+  res.render('turtle-search', {
+    // fill in later???
+    layout: 'other_main' // layouts/other_main.handlebars
+  });
+});
+
+// axios allows us to do the call inside homeRoutes without ever doing an API call in the browser
+// this fixes things like CORS issues by not doing them in the browser at all
+router.get('/axios-turtle/:term', async (req, res) => {
+  // ANY axios call
+  const requestUrl = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_APIKEY}&q=${req.params.term}&limit=5&offset=0&rating=pg&lang=en&bundle=messaging_non_clips`;
+  const data = await axios.get(requestUrl);
+  // console.log(axiosDataHere);
+  // // simple serialize
+  simplifiedData = JSON.parse(JSON.stringify(data.data));
+
+  // found an extra data key for only giphy
+  simplifiedData = simplifiedData.data;
+
+  console.log(simplifiedData);
+  res.render('axios-turtle', {
+    term: req.params.term,
+    // apikey: process.env.GIPHY_APIKEY, // do not need to expose api key if using axios
+
+    gifs: simplifiedData,
     // fill in later???
     layout: 'other_main' // layouts/other_main.handlebars
   });

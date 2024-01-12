@@ -1,0 +1,10 @@
+<div id="giphy">
+  <!-- put image here -->
+  <ul>
+    {{#each gifs as |gif|}}
+      <!-- you can switch between different partials as necessary while debugging -->
+      {{!--  gif-original --}}
+      {{> gif-fixed-height}}
+    {{/each}}
+  </ul>
+</div>
